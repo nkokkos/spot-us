@@ -10,3 +10,9 @@ test:
   username: root
   password:
 
+production:
+  adapter: mysql
+  database: spotus_production
+  username: root
+  
+
