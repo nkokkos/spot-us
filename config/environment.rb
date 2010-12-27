@@ -1,12 +1,15 @@
 RAILS_GEM_VERSION = '2.3.2' unless defined? RAILS_GEM_VERSION
 
+ENV['RAILS_ENV'] ||= 'development'
+
 require File.join(File.dirname(__FILE__), 'boot')
 require 'yaml' 
 
 config_file_path = File.join(RAILS_ROOT, *%w(config settings.yml))
 if File.exist?(config_file_path)
   config = YAML.load_file(config_file_path)
-  APP_CONFIG = config.has_key?(RAILS_ENV) ? config[RAILS_ENV] : {}
+  #APP_CONFIG = config.has_key?(RAILS_ENV) ? config[RAILS_ENV] : {}
+  APP_CONFIG = config
 else
   puts "WARNING: configuration file #{config_file_path} not found." 
   APP_CONFIG = {}
@@ -16,10 +19,10 @@ DEFAULT_HOST = APP_CONFIG[:default_host] || ".spotus.local"
 
 Rails::Initializer.run do |config|
   
-  MEMCACHE_SERVERS = ['localhost']
-  config.after_initialize do
-    SpotUs::Cache.initialize!
-  end
+#  MEMCACHE_SERVERS = ['localhost']
+#  config.after_initialize do
+#    SpotUs::Cache.initialize!
+#  end
   
   config.load_paths += %W( #{RAILS_ROOT}/app/concerns )
   
@@ -28,14 +31,17 @@ Rails::Initializer.run do |config|
   config.gem "fastercsv"
   config.gem 'thoughtbot-factory_girl', :lib => 'factory_girl', :source => 'http://gems.github.com'
   config.gem "rubyist-aasm", :lib => "aasm", :version => '>=2.0.5', :source => 'http://gems.github.com'
-  config.gem 'mislav-will_paginate', :lib => 'will_paginate', :version => '>=2.3.1', :source => 'http://gems.github.com/'
-  config.gem "rspec-rails", :lib => false, :version => "= 1.2.2"
-  config.gem "cucumber", :lib => false, :version => "= 0.1.16"
-  config.gem "webrat", :lib => false, :version => "= 0.4.4"
-  config.gem "money", :version => ">=2.1.3"
-  config.gem "oauth2"
-  config.gem "json"
-  config.gem "twitter_oauth"
+# config.gem 'mislav-will_paginate', :lib => 'will_paginate', :version => '>=2.3.1', :source => 'http://gems.github.com/'
+ 
+
+
+#  config.gem "rspec-rails", :lib => false, :version => "= 1.2.2"
+#  config.gem "cucumber", :lib => false, :version => "= 0.1.16"
+#  config.gem "webrat", :lib => false, :version => "= 0.4.4"
+#  config.gem "money", :version => ">=2.1.3"
+#  config.gem "oauth2"
+#  config.gem "json"
+#  config.gem "twitter_oauth"
 
   config.time_zone = 'UTC'
 
