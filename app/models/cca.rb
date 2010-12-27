@@ -14,13 +14,13 @@ class Cca < ActiveRecord::Base
                     :styles => { :thumb => '99x8#', 
                         :large_banner => "992x78#", 
                         :small_banner => "496x39#"},
-                    :storage => :s3,
-                    :s3_credentials => "#{RAILS_ROOT}/config/s3.yml",
-                    :bucket =>   S3_BUCKET,
-                    :path => "cca-banners/" <<
+     #               :storage => :s3,
+     #               :s3_credentials => "#{RAILS_ROOT}/config/s3.yml",
+     #               :bucket =>   S3_BUCKET,
+                    :path => ":rails_root/public/assets/cca-banners/" <<
                              ":attachment/:id_partition/" <<
                              ":basename_:style.:extension",
-                    :url =>  "cca-banners/:attachment/:id_partition/" <<
+                    :url =>  "/assets/cca-banners/:attachment/:id_partition/" <<
                              ":basename_:style.:extension"
 
   unless Rails.env.development?

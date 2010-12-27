@@ -11,13 +11,13 @@ class Topic < ActiveRecord::Base
                         :front_story => "300x163#", 
                         :medium_alt=>"215x180#", 
                         :medium_alt_1=>"268x210#" },
-                    :storage => :s3,
-                    :s3_credentials => "#{RAILS_ROOT}/config/s3.yml",
-                    :bucket =>   S3_BUCKET,
-                    :path => "topics/" <<
+  #                  :storage => :s3,
+  #                  :s3_credentials => "#{RAILS_ROOT}/config/s3.yml",
+  #                  :bucket =>   S3_BUCKET,
+                    :path => ":rails_root/public/assets/topics/" <<
                              ":attachment/:id_partition/" <<
                              ":basename_:style.:extension",
-                    :url =>  "topics/:attachment/:id_partition/" <<
+                    :url =>  "/assets/topics/:attachment/:id_partition/" <<
                              ":basename_:style.:extension",
                     :default_url => "/images/featured_images/missing_:style.png"
 

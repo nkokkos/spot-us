@@ -135,13 +135,13 @@ class User < ActiveRecord::Base
   
   has_attached_file :photo,
                     :styles      => { :thumb => '44x44#', :mini_thumb => '32x32#' },
-                    :storage => :s3,
-                    :s3_credentials => "#{RAILS_ROOT}/config/s3.yml",
-                    :bucket =>   S3_BUCKET,
-                    :path        => "profiles/" <<
+       #             :storage => :s3,
+       #             :s3_credentials => "#{RAILS_ROOT}/config/s3.yml",
+       #             :bucket =>   S3_BUCKET,
+                    :path        => ":rails_root/public/assets/profiles/" <<
                                     ":attachment/:id_partition/" <<
                                     ":basename_:style.:extension",
-                    :url         => "profiles/:attachment/:id_partition/" <<
+                    :url         => "/assets/profiles/:attachment/:id_partition/" <<
                                     ":basename_:style.:extension",
                     :default_url => "/images/default_avatar.png"
 

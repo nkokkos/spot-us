@@ -16,6 +16,8 @@ else
 end
 
 DEFAULT_HOST = APP_CONFIG[:default_host] || ".spotus.local"
+CACHE_AVAILABLE                     = true
+CACHE_TIMEOUT                       = 30.minutes
 
 Rails::Initializer.run do |config|
   
@@ -24,6 +26,10 @@ Rails::Initializer.run do |config|
 #    SpotUs::Cache.initialize!
 #  end
   
+
+  
+  
+  
   config.load_paths += %W( #{RAILS_ROOT}/app/concerns )
   
   # need to update this list soon :-)
@@ -31,16 +37,21 @@ Rails::Initializer.run do |config|
   config.gem "fastercsv"
   config.gem 'thoughtbot-factory_girl', :lib => 'factory_girl', :source => 'http://gems.github.com'
   config.gem "rubyist-aasm", :lib => "aasm", :version => '>=2.0.5', :source => 'http://gems.github.com'
-# config.gem 'mislav-will_paginate', :lib => 'will_paginate', :version => '>=2.3.1', :source => 'http://gems.github.com/'
+  config.gem 'will_paginate', :lib => 'will_paginate', :version => '=2.3.11', :source => 'http://gems.github.com/'
  
 
 
 #  config.gem "rspec-rails", :lib => false, :version => "= 1.2.2"
 #  config.gem "cucumber", :lib => false, :version => "= 0.1.16"
 #  config.gem "webrat", :lib => false, :version => "= 0.4.4"
-#  config.gem "money", :version => ">=2.1.3"
-#  config.gem "oauth2"
-#  config.gem "json"
+
+  config.gem "money", :version => ">=2.1.3"
+  config.gem "oauth2"
+  config.gem "json"
+  config.gem "url_shortener"
+  config.gem "crack" 
+
+
 #  config.gem "twitter_oauth"
 
   config.time_zone = 'UTC'
@@ -73,14 +84,15 @@ SubdomainFu.mirrors = %w(www spotus spotreporting)
 # define constant to see if it is in a production mode...
 REAL_PRODUCTION_MODE = (RAILS_ENV=="production")
 
-begin
-   PhusionPassenger.on_event(:starting_worker_process) do |forked|
-     if forked
-       # We're in smart spawning mode, so...
-       # Close duplicated memcached connections - they will open themselves
-       CACHE.reset
-     end
-   end
+
+#begin
+#   PhusionPassenger.on_event(:starting_worker_process) do |forked|
+#     if forked
+#       # We're in smart spawning mode, so...
+#       # Close duplicated memcached connections - they will open themselves
+#       CACHE.reset
+#     end
+#   end
 # In case you're not running under Passenger (i.e. devmode with mongrel)
-rescue NameError => error
-end
+#rescue NameError => error
+#end

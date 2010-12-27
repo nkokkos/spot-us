@@ -1,4 +1,4 @@
-require 'twitter'
+#require 'twitter'
  
 class TwitterCredential < ActiveRecord::Base
     

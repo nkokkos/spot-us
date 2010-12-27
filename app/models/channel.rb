@@ -3,12 +3,12 @@ class Channel < ActiveRecord::Base
   validates_uniqueness_of :title
   has_attached_file :channel_image,
                     :styles => { :thumb => '44x44#', :medium => "200x150#" },
-                    :storage => :s3,
-                    :s3_credentials => "#{RAILS_ROOT}/config/s3.yml",
-                    :bucket =>   S3_BUCKET,
+             #       :storage => :s3,
+             #       :s3_credentials => "#{RAILS_ROOT}/config/s3.yml",
+             #       :bucket =>   S3_BUCKET,
                     :default_url => "/images/default_avatar.png",
-                    :path        => "channels/:attachment/:id_partition/:basename_:style.:extension",
-                    :url         => "channels/:attachment/:id_partition/:basename_:style.:extension"
+                    :path        => ":rails_root/public/assets/channels/:attachment/:id_partition/:basename_:style.:extension",
+                    :url         => "assets/channels/:attachment/:id_partition/:basename_:style.:extension"
   
   named_scope :hilited, :conditions => "channels.status = 'hilited'"
   #named_scope :by_network, lambda {|network|
