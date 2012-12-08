@@ -1,4 +1,4 @@
-h2. This forked version of "Spot us" includes necessary changes so that
+h3. This forked version of "Spot us" includes necessary changes so that
 deploying on localhost server becomes easier. Some modules that are 
 required in the original code are deactivated, such as memcache. 
 Look at the commit history for more info
